@@ -1,0 +1,10 @@
+// Instantánea del vocabulario completo con el tema frame5: es contra lo que compara syx-scan.
+@use '../vendor/syx/scss/themes/_base/universal' as *;
+@use '../vendor/syx/scss/themes/_shared/core' as *;
+@use '../vendor/syx/scss/themes/_shared/bundle-full' as *;
+@use '../src/theme/theme' as *;
+@include universal-values();
+@include theme-frame5();
+@include theme-frame5-fonts();
+@include syx-core(frame5);
+@include syx-bundle-full(frame5);

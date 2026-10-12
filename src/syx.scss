@@ -1,0 +1,18 @@
+// FRAME V — SYX a medida: solo lo que la página usa.
+// FRAME IV compilaba syx-bundle-core entero (34 componentes, 188 KB) para
+// usar tres. Aquí: núcleo + los cinco componentes que aparecen en el HTML.
+@use '../vendor/syx/scss/themes/_base/universal' as *;
+@use '../vendor/syx/scss/themes/_shared/core' as *;
+@use '../vendor/syx/scss/atoms/index' as *;
+@use '../vendor/syx/scss/molecules/index' as *;
+@use 'theme/theme' as *;
+
+@include universal-values();
+@include theme-frame5();
+@include theme-frame5-fonts();
+@include syx-core(frame5, $helpers: false);
+@include atom-btn(frame5);
+@include atom-icon(frame5);
+@include atom-link(frame5);
+@include mol-disclosure(frame5);
+@include mol-dialog(frame5);

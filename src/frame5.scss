@@ -1,0 +1,1032 @@
+// ================================================
+// FRAME V — capa de la app sobre SYX (tema frame5)
+// ================================================
+// Contrato: vendor/syx/CONSUMING.md. Prefijo de proyecto: frame5-.
+//  · Tokens de proyecto (--frame5-*) fuera de capa, leyendo --semantic-*.
+//  · Reglas dentro de @layer syx.app; la cascada la gobiernan las capas.
+//  · Posición y transición, por los mixins de SYX.
+//  · Ninguna regla pinta una clase de SYX: los componentes cambian por token.
+// ================================================
+
+@use '../vendor/syx/scss/abstracts/mixins/mixins' as *;
+@use 'theme/grid-tokens' as *;
+
+@layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.app, syx.utilities;
+
+// ------------------------------------------------
+// 1 · TOKENS DEL PROYECTO
+// ------------------------------------------------
+:root {
+  // Color: roles del tema, nunca primitivos
+  // Ciruela y papel fijos (tintas): los capítulos de color propio no cambian con el modo
+  --frame5-plum: var(--semantic-color-ink-dark);
+  --frame5-paper: var(--semantic-color-bg-primary);
+  --frame5-blush: var(--semantic-color-bg-secondary);
+  --frame5-candy: var(--semantic-color-bg-tertiary);
+  --frame5-magenta: var(--semantic-color-bg-emphasis);
+  --frame5-magenta-text: var(--semantic-color-primary-text);
+  --frame5-teal: var(--semantic-color-tertiary);
+  --frame5-ink: var(--semantic-color-text-primary);
+  --frame5-ink-inverse: var(--semantic-color-ink-light);
+  --frame5-rubor: var(--semantic-color-category-1-bg);    // rubor fijo: texto suave sobre ciruela (12,7:1)
+  --frame5-caramelo: var(--semantic-color-category-2-bg); // caramelo fijo (7,2:1 sobre ciruela)
+  --frame5-mute: var(--semantic-color-text-secondary);
+  --frame5-line: var(--semantic-color-border-subtle);
+  --frame5-swatch-plum: var(--semantic-color-category-5-bg);
+  --frame5-swatch-plum-fg: var(--semantic-color-category-5-fg);
+  --frame5-swatch-magenta: var(--semantic-color-category-3-bg);
+  --frame5-swatch-magenta-fg: var(--semantic-color-category-3-fg);
+  --frame5-swatch-teal: var(--semantic-color-category-4-bg);
+  --frame5-swatch-teal-fg: var(--semantic-color-category-4-fg);
+  --frame5-swatch-candy: var(--semantic-color-category-2-bg);
+  --frame5-swatch-candy-fg: var(--semantic-color-category-2-fg);
+  --frame5-swatch-blush: var(--semantic-color-category-1-bg);
+  --frame5-swatch-blush-fg: var(--semantic-color-category-1-fg);
+
+  // Tipografía
+  --frame5-font-display: var(--semantic-font-family-heading);
+  --frame5-font-text: var(--semantic-font-family-primary);
+  --frame5-font-mono: var(--semantic-font-family-mono);
+  --frame5-weight-display: var(--semantic-font-weight-heading);
+  --frame5-weight-medium: var(--semantic-font-weight-medium);
+  --frame5-size-mono: var(--semantic-font-size-body-small);
+  --frame5-size-body: var(--semantic-font-size-body-large);
+  --frame5-tracking-mono: 0.08em;
+  --frame5-tracking-display: -0.035em;
+  --frame5-leading-display: 0.86;  // mayúsculas Syne: cap 0,647 em, sin descendentes
+  --frame5-leading-text: 1.5;      // gridcalc compose: interlineado 1,5
+
+  // Línea y movimiento
+  --frame5-hairline: var(--semantic-border-width-thin);
+  --frame5-stroke: var(--semantic-border-width-default);
+  --frame5-corner: calc(1.25 * var(--frame5-unit));
+  --frame5-ease: var(--semantic-easing-out);
+  --frame5-duration: var(--semantic-duration-base);
+  --frame5-duration-slow: var(--semantic-duration-slow);
+  --frame5-chrome-height: calc(2 * var(--frame5-unit) + 2 * var(--frame5-inner));
+
+  // El cromo fijo cambia de tinta con el capítulo (html[data-tone])
+  --frame5-chrome-ink: var(--frame5-ink);
+  --frame5-chrome-plate: var(--frame5-blush);
+
+  // Estado del marco del capítulo 01 (lo anima el JS; sin JS, se queda aquí)
+  --frame5-hero-top: 37%;
+  --frame5-hero-bottom: 22%;
+  --frame5-hero-x: var(--frame5-margin);
+  --frame5-noise-blur: 0px;
+}
+
+@media (min-width: 64em) {
+  :root {
+    --frame5-hero-top: 20%;
+    --frame5-hero-bottom: 18%;
+    --frame5-hero-x: 33.333%;
+  }
+}
+
+:root[data-tone="dark"] {
+  --frame5-chrome-ink: var(--frame5-ink-inverse);
+  --frame5-chrome-plate: var(--frame5-plum);
+}
+
+// ------------------------------------------------
+// 2 · REGLAS
+// ------------------------------------------------
+@layer syx.app {
+  /* syx-reuse-file: retícula de página propia (12 pistas); layout-grid de SYX no admite los spans asimétricos de cada capítulo */
+
+  // ---------- Página ----------
+  /* syx-reuse: checked elements-base (body) — la página fija tipografía y fondo propios */
+  .frame5-page {
+    margin: 0;
+    background: var(--frame5-paper);
+    color: var(--frame5-ink);
+    font-family: var(--frame5-font-text);
+    line-height: var(--frame5-leading-text);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .frame5-wrap {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: var(--frame5-gutter);
+    max-inline-size: var(--layout-max-width);
+    margin-inline: auto;
+    padding-inline: var(--frame5-margin);
+  }
+
+  @media (min-width: 48em) {
+    .frame5-wrap { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  }
+
+  /* syx-reuse: checked atom-txt, atom-label — etiqueta de visor en monoespaciada, no hay variante */
+  .frame5-eyebrow {
+    margin: 0;
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    font-weight: var(--frame5-weight-medium);
+    letter-spacing: var(--frame5-tracking-mono);
+    text-transform: uppercase;
+  }
+
+  /* syx-reuse: checked sr-only mixin — enlace de salto visible al enfocar */
+  .frame5-skip {
+    @include absolute($top: var(--frame5-inner), $left: var(--frame5-inner));
+    z-index: 100;
+    padding: var(--frame5-inner) var(--frame5-padding);
+    background: var(--frame5-plum);
+    color: var(--frame5-ink-inverse);
+    transform: translateY(-200%);
+
+    &:focus-visible { transform: none; }
+  }
+
+  // ---------- Cromo fijo: cabecera, visor, índice ----------
+  /* syx-reuse: checked org-site-header — no es una navegación de sitio, es el visor de cámara */
+  .frame5-chrome {
+    @include fixed($top: 0, $left: 0, $right: 0);
+    z-index: 40;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--frame5-gutter);
+    padding: calc(var(--frame5-inner) + env(safe-area-inset-top, 0px)) var(--frame5-margin) var(--frame5-inner);
+    color: var(--frame5-chrome-ink);
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: var(--frame5-tracking-mono);
+    text-transform: uppercase;
+    pointer-events: none;
+    @include transition(color var(--frame5-duration) var(--frame5-ease));
+
+    > * { pointer-events: auto; }
+  }
+
+  /* syx-reuse: checked atom-link — marca de la casa, no un enlace de texto */
+  .frame5-chrome__brand {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--frame5-touch);
+    padding-inline: var(--frame5-padding);
+    background: var(--frame5-chrome-plate);
+    color: var(--frame5-chrome-ink);
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-lead);
+    letter-spacing: var(--frame5-tracking-display);
+    text-decoration: none;
+    text-transform: uppercase;
+    @include transition(background-color var(--frame5-duration) var(--frame5-ease), color var(--frame5-duration) var(--frame5-ease));
+
+    sup {
+      margin-inline-start: var(--frame5-micro);
+      font-family: var(--frame5-font-mono);
+      font-size: var(--frame5-size-mono);
+      letter-spacing: 0;
+    }
+  }
+
+  /* syx-reuse: checked atom-pill — indicador de grabación con texto vivo */
+  .frame5-chrome__now {
+    display: none;
+    color: inherit;
+    align-items: center;
+    gap: var(--frame5-inner);
+    margin: 0;
+    padding: var(--frame5-micro) var(--frame5-padding);
+    background: var(--frame5-chrome-plate);
+    @include transition(background-color var(--frame5-duration) var(--frame5-ease));
+
+    @media (min-width: 40em) { display: inline-flex; }
+  }
+
+  /* syx-reuse: checked atom-spinner — punto de grabación, no un estado de carga */
+  .frame5-chrome__rec {
+    inline-size: var(--frame5-inner);
+    block-size: var(--frame5-inner);
+    background: var(--frame5-magenta);
+    border-radius: 50%;
+    animation: frame5-blink 1.6s steps(2, jump-none) infinite;
+
+    @include reduced-motion { animation: none; }
+  }
+
+  /* syx-reuse: checked atom-btn — control discreto del cromo; atom-btn rompería el visor con su caja */
+  .frame5-chrome__motion {
+    justify-self: end;
+    min-block-size: var(--frame5-touch);
+    padding-inline: var(--frame5-padding);
+    border: 0;
+    background: var(--frame5-chrome-plate);
+    color: var(--frame5-chrome-ink);
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    white-space: nowrap;
+    cursor: pointer;
+    @include transition(background-color var(--frame5-duration) var(--frame5-ease), color var(--frame5-duration) var(--frame5-ease));
+
+    &[aria-pressed="true"] { text-decoration-style: wavy; }
+    &:focus-visible { @include focus-ring(var(--frame5-chrome-ink)); }
+  }
+
+  /* syx-reuse: checked —; marcas de encuadre decorativas */
+  .frame5-viewfinder {
+    @include fixed($top: 0, $right: 0, $bottom: 0, $left: 0);
+    z-index: 30;
+    color: var(--frame5-chrome-ink);
+    pointer-events: none;
+    @include transition(color var(--frame5-duration) var(--frame5-ease));
+  }
+
+  .frame5-viewfinder__corner,
+  .frame5-hero__corner {
+    inline-size: var(--frame5-corner);
+    block-size: var(--frame5-corner);
+    border: 0 solid currentColor;
+  }
+
+  .frame5-viewfinder__corner {
+    @include absolute();
+    display: none;
+
+    @media (min-width: 64em) { display: block; }
+
+    &[data-corner="tl"] { inset-block-start: calc(var(--frame5-chrome-height) + var(--frame5-inner)); inset-inline-start: calc(var(--frame5-margin) / 2); border-block-start-width: var(--frame5-stroke); border-inline-start-width: var(--frame5-stroke); }
+    &[data-corner="tr"] { inset-block-start: calc(var(--frame5-chrome-height) + var(--frame5-inner)); inset-inline-end: calc(var(--frame5-margin) / 2); border-block-start-width: var(--frame5-stroke); border-inline-end-width: var(--frame5-stroke); }
+    &[data-corner="bl"] { inset-block-end: var(--frame5-padding); inset-inline-start: calc(var(--frame5-margin) / 2); border-block-end-width: var(--frame5-stroke); border-inline-start-width: var(--frame5-stroke); }
+    &[data-corner="br"] { inset-block-end: var(--frame5-padding); inset-inline-end: calc(var(--frame5-margin) / 2); border-block-end-width: var(--frame5-stroke); border-inline-end-width: var(--frame5-stroke); }
+  }
+
+  .frame5-viewfinder__tc,
+  .frame5-viewfinder__meta {
+    @include absolute($bottom: var(--frame5-padding));
+    display: none;
+    padding: var(--frame5-micro) var(--frame5-inner);
+    background: var(--frame5-chrome-plate);
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: var(--frame5-tracking-mono);
+    font-variant-numeric: tabular-nums;
+    @include transition(background-color var(--frame5-duration) var(--frame5-ease));
+
+    @media (min-width: 64em) { display: block; }
+  }
+
+  .frame5-viewfinder__tc { inset-inline-start: calc(var(--frame5-margin) / 2 + var(--frame5-corner) + var(--frame5-inner)); }
+  .frame5-viewfinder__meta { inset-inline-end: calc(var(--frame5-margin) / 2 + var(--frame5-corner) + var(--frame5-inner)); }
+
+  /* syx-reuse: checked atom-pagination, mol-tabs — selector de escena del visor con estado de scroll */
+  .frame5-index {
+    @include fixed($bottom: calc(var(--frame5-padding) - var(--frame5-inner) + env(safe-area-inset-bottom, 0px)), $left: 50%);
+    z-index: 35;
+    display: none;
+    transform: translateX(-50%);
+    color: var(--frame5-chrome-ink);
+    @include transition(color var(--frame5-duration) var(--frame5-ease));
+
+    @media (min-width: 64em) { display: block; }
+
+    ol { display: flex; margin: 0; padding: 0; list-style: none; }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: var(--frame5-micro);
+      min-block-size: var(--frame5-touch);
+      min-inline-size: var(--frame5-touch);
+      justify-content: center;
+      color: inherit;
+      font-family: var(--frame5-font-mono);
+      font-size: 0;
+      letter-spacing: var(--frame5-tracking-mono);
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    a span,
+    a[aria-current="true"],
+    a:hover,
+    a:focus-visible { font-size: var(--frame5-size-mono); }
+
+    a span {
+      padding: var(--frame5-micro);
+      background: var(--frame5-chrome-plate);
+      border-block-end: var(--frame5-stroke) solid transparent;
+      @include transition(background-color var(--frame5-duration) var(--frame5-ease));
+    }
+
+    a[aria-current="true"],
+    a:hover,
+    a:focus-visible {
+      padding-inline-end: var(--frame5-inner);
+      background: var(--frame5-chrome-plate);
+      span { border-block-end-color: currentColor; }
+    }
+
+    a:focus-visible { @include focus-ring(var(--frame5-chrome-ink)); }
+  }
+
+  // ---------- 01 · Hero ----------
+  /* syx-reuse: checked org-app-shell — escena de vídeo con marco animado */
+  .frame5-hero {
+    background: var(--frame5-blush);
+    color: var(--frame5-ink);
+  }
+
+  .frame5-hero__stage {
+    @include relative();
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: auto auto 1fr auto auto;
+    column-gap: var(--frame5-gutter);
+    min-block-size: 100svh;
+    padding: calc(var(--frame5-chrome-height) + var(--frame5-padding)) var(--frame5-margin) calc(2 * var(--frame5-unit));
+    overflow: clip;
+
+    @media (min-width: 64em) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: auto 1fr auto auto;
+      padding-block-end: calc(var(--frame5-touch) + var(--frame5-unit));
+    }
+  }
+
+  .frame5-hero__window {
+    @include absolute($top: 0, $right: 0, $bottom: 0, $left: 0);
+    clip-path: inset(var(--frame5-hero-top) var(--frame5-hero-x) var(--frame5-hero-bottom) var(--frame5-hero-x));
+    background: var(--frame5-candy);
+  }
+
+  .frame5-hero__video,
+  .frame5-color__video,
+  .frame5-process__video {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .frame5-hero__corner {
+    @include absolute();
+    z-index: 1;
+    pointer-events: none;
+    --frame5-gap: calc(-1 * var(--frame5-inner));
+
+    &[data-corner="tl"] { inset-block-start: calc(var(--frame5-hero-top) + var(--frame5-gap)); inset-inline-start: calc(var(--frame5-hero-x) + var(--frame5-gap)); border-block-start-width: var(--frame5-stroke); border-inline-start-width: var(--frame5-stroke); }
+    &[data-corner="tr"] { inset-block-start: calc(var(--frame5-hero-top) + var(--frame5-gap)); inset-inline-end: calc(var(--frame5-hero-x) + var(--frame5-gap)); border-block-start-width: var(--frame5-stroke); border-inline-end-width: var(--frame5-stroke); }
+    &[data-corner="bl"] { inset-block-end: calc(var(--frame5-hero-bottom) + var(--frame5-gap)); inset-inline-start: calc(var(--frame5-hero-x) + var(--frame5-gap)); border-block-end-width: var(--frame5-stroke); border-inline-start-width: var(--frame5-stroke); }
+    &[data-corner="br"] { inset-block-end: calc(var(--frame5-hero-bottom) + var(--frame5-gap)); inset-inline-end: calc(var(--frame5-hero-x) + var(--frame5-gap)); border-block-end-width: var(--frame5-stroke); border-inline-end-width: var(--frame5-stroke); }
+  }
+
+  .frame5-hero__eyebrow {
+    z-index: 2;
+    justify-self: start;
+    padding: var(--frame5-micro) var(--frame5-inner);
+    margin-inline-start: calc(-1 * var(--frame5-inner));
+    background: var(--frame5-blush);
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* syx-reuse: checked atom-title — display de escena con dos renglones que se separan */
+  .frame5-hero__title {
+    z-index: 2;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: var(--frame5-unit) 0 0;
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-display);
+    line-height: var(--frame5-leading-display);
+    letter-spacing: var(--frame5-tracking-display);
+    text-transform: uppercase;
+
+    @media (min-width: 64em) {
+      grid-row: 2 / 4;
+      align-content: space-between;
+      margin-block-start: calc(2 * var(--frame5-unit));
+      font-size: min(var(--frame5-type-display), 13.2vw, 21svh);
+    }
+  }
+
+  .frame5-hero__line {
+    display: block;
+    will-change: transform;
+
+    &[data-line="b"] { justify-self: end; text-align: end; }
+  }
+
+  /* syx-reuse: checked mol-card — placa de texto sobre vídeo, sin estructura de tarjeta */
+  .frame5-hero__intro {
+    z-index: 3;
+    display: grid;
+    gap: var(--frame5-padding);
+    justify-items: start;
+    grid-column: 1 / -1;
+    grid-row: 4;
+    align-self: end;
+    margin-block-start: var(--frame5-unit);
+
+    p {
+      margin: 0;
+      padding: var(--frame5-micro) var(--frame5-inner);
+      background: var(--frame5-blush);
+      font-size: var(--frame5-type-lead);
+      line-height: 1.25;
+      max-inline-size: 14em;
+    }
+
+    @media (min-width: 64em) {
+      grid-column: 9 / span 4;
+      grid-row: 2;
+      align-self: start;
+      justify-self: end;
+      margin: calc(2 * var(--frame5-unit) + var(--frame5-inner)) 0 0;
+    }
+  }
+
+  .frame5-hero__hint {
+    z-index: 2;
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin: var(--frame5-unit) 0 0;
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: var(--frame5-tracking-mono);
+    text-transform: uppercase;
+
+    @media (min-width: 64em) {
+      grid-column: 7 / -1;
+      grid-row: 1;
+      justify-self: end;
+      margin: 0;
+    }
+  }
+
+  // ---------- 02 · Manifiesto ----------
+  /* syx-reuse: checked mol-card, atom-txt — bloque de manifiesto a sangre en superficie inversa */
+  .frame5-manifesto {
+    --semantic-color-text-primary: var(--frame5-ink-inverse);
+    background: var(--frame5-plum);
+    color: var(--frame5-ink-inverse);
+    padding-block: calc(var(--frame5-chrome-height) + 2 * var(--frame5-section)) calc(2 * var(--frame5-section));
+    --semantic-focus-ring-color: var(--frame5-teal);
+  }
+
+  .frame5-manifesto__grid { row-gap: calc(2 * var(--frame5-unit)); }
+  .frame5-manifesto__eyebrow { grid-column: 1 / -1; color: var(--frame5-rubor); }
+
+  .frame5-manifesto__title {
+    grid-column: 1 / -1;
+    display: grid;
+    margin: 0;
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-headline);
+    line-height: var(--frame5-leading-display);
+    letter-spacing: var(--frame5-tracking-display);
+    text-transform: uppercase;
+
+    em { font-style: normal; color: var(--frame5-teal); }
+  }
+
+  .frame5-manifesto__line {
+    display: block;
+    will-change: transform;
+
+    &[data-dir="1"] { justify-self: end; text-align: end; }
+  }
+
+  .frame5-manifesto__note {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: var(--frame5-padding);
+    color: var(--frame5-rubor);
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: var(--frame5-tracking-mono);
+    text-transform: uppercase;
+
+    p { margin: 0; }
+
+    @media (min-width: 48em) { grid-column: 1 / span 4; align-self: start; }
+  }
+
+  // marca de registro de imprenta: un círculo con cruz
+  .frame5-manifesto__plus {
+    @include relative();
+    flex: none;
+    inline-size: calc(2 * var(--frame5-unit));
+    block-size: calc(2 * var(--frame5-unit));
+    border: var(--frame5-stroke) solid currentColor;
+    border-radius: 50%;
+
+    &::before,
+    &::after {
+      content: "";
+      @include absolute($top: 50%, $left: -25%);
+      inline-size: 150%;
+      block-size: var(--frame5-stroke);
+      background: currentColor;
+    }
+
+    &::after { transform: rotate(90deg); }
+  }
+
+  .frame5-manifesto__text {
+    grid-column: 1 / -1;
+    max-inline-size: var(--frame5-measure);
+    font-size: var(--frame5-type-lead);
+    line-height: 1.32;
+
+    p { margin: 0 0 0.75lh; }
+    p:last-child { margin: 0; }
+
+    @media (min-width: 48em) { grid-column: 6 / -1; }
+  }
+
+  .frame5-word { @include transition(color var(--frame5-duration) linear); }
+  // Sin leer: rosa caramelo (7,2:1 sobre ciruela). Leída: papel (15,7:1). El efecto no rompe el contraste.
+  .js .frame5-manifesto__text[data-ready] .frame5-word { color: var(--frame5-caramelo); }
+  .js .frame5-manifesto__text[data-ready] .frame5-word.is-lit { color: var(--frame5-ink-inverse); }
+
+  // ---------- 03 · Color ----------
+  /* syx-reuse: checked mol-card — escena partida vídeo/copy a sangre */
+  .frame5-color {
+    --semantic-color-text-primary: var(--frame5-ink-inverse);
+    background: var(--frame5-magenta);
+    color: var(--frame5-ink-inverse);
+    --semantic-focus-ring-color: var(--frame5-paper);
+  }
+
+  .frame5-color__stage {
+    display: grid;
+
+    @media (min-width: 64em) {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      min-block-size: 100svh;
+    }
+  }
+
+  .frame5-color__media {
+    @include relative();
+    aspect-ratio: 4 / 5;
+    overflow: clip;
+    background: var(--frame5-candy);
+
+    @media (min-width: 48em) { aspect-ratio: 16 / 10; }
+    @media (min-width: 64em) { aspect-ratio: auto; }
+  }
+
+  .frame5-color__video { @include absolute($top: 0, $left: 0); }
+
+  .frame5-color__blinds {
+    @include absolute($top: 0, $right: 0, $bottom: 0, $left: 0);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .frame5-color__blind {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--frame5-micro);
+    padding: var(--frame5-padding) var(--frame5-inner) calc(2 * var(--frame5-unit));
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    transform-origin: 50% 0;
+    will-change: transform;
+
+    b { font-weight: var(--frame5-weight-medium); text-transform: uppercase; letter-spacing: var(--frame5-tracking-mono); }
+    i { font-style: normal; display: none; }
+
+    @media (min-width: 48em) { i { display: block; } }
+
+    &:nth-child(even) { transform-origin: 50% 100%; }
+
+    @media (min-width: 64em) { padding-block-end: calc(var(--frame5-touch) + 2 * var(--frame5-unit)); }
+    &[data-swatch="plum"] { background: var(--frame5-swatch-plum); color: var(--frame5-swatch-plum-fg); }
+    &[data-swatch="magenta"] { background: var(--frame5-swatch-magenta); color: var(--frame5-swatch-magenta-fg); }
+    &[data-swatch="teal"] { background: var(--frame5-swatch-teal); color: var(--frame5-swatch-teal-fg); }
+    &[data-swatch="candy"] { background: var(--frame5-swatch-candy); color: var(--frame5-swatch-candy-fg); }
+    &[data-swatch="blush"] { background: var(--frame5-swatch-blush); color: var(--frame5-swatch-blush-fg); }
+  }
+
+  // Sin JS (o con movimiento reducido) las persianas ya están abiertas: el vídeo se ve.
+  html:not(.js) .frame5-color__blinds,
+  .is-still .frame5-color__blinds { display: none; }
+
+  .frame5-color__caption {
+    @include absolute($top: calc(var(--frame5-chrome-height) + var(--frame5-padding)), $left: var(--frame5-margin));
+    margin: 0;
+    padding: var(--frame5-micro) var(--frame5-padding);
+    background: var(--frame5-plum);
+    color: var(--frame5-ink-inverse);
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-lead);
+    text-transform: uppercase;
+    letter-spacing: var(--frame5-tracking-display);
+  }
+
+  .frame5-color__copy {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: var(--frame5-unit);
+    padding: calc(2 * var(--frame5-unit)) var(--frame5-margin) var(--frame5-section);
+
+    p { margin: 0; max-inline-size: 22em; font-size: var(--frame5-size-body); }
+
+    @media (min-width: 64em) {
+      padding: calc(var(--frame5-chrome-height) + var(--frame5-unit)) calc(var(--frame5-margin) + 2 * var(--frame5-unit)) var(--frame5-section) var(--frame5-gutter);
+    }
+  }
+
+  .frame5-color__title {
+    margin: 0;
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-title);
+    line-height: var(--frame5-leading-display);
+    letter-spacing: var(--frame5-tracking-display);
+    text-transform: uppercase;
+
+    span {
+      display: block;
+      font-size: 1.62em;
+      color: transparent;
+      -webkit-text-stroke: var(--frame5-stroke) var(--frame5-ink-inverse);
+    }
+
+    @media (min-width: 64em) { font-size: calc(0.75 * var(--frame5-type-title)); }
+  }
+
+  .frame5-color__copy .frame5-color__proof {
+    padding: var(--frame5-padding);
+    background: var(--frame5-plum);
+    color: var(--frame5-ink-inverse);
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    font-weight: var(--frame5-weight-medium);
+  }
+
+  // ---------- 04 · Señal ----------
+  /* syx-reuse: checked —; lienzo interactivo de líneas, sin equivalente en SYX */
+  .frame5-signal {
+    @include relative();
+    min-block-size: 100svh;
+    display: grid;
+    align-items: center;
+    background: var(--frame5-teal);
+    color: var(--frame5-plum);
+    --semantic-color-text-primary: var(--frame5-plum);
+    overflow: clip;
+    touch-action: pan-y;
+  }
+
+  .frame5-signal__canvas {
+    @include absolute($top: 0, $right: 0, $bottom: 0, $left: 0);
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  .frame5-signal__grid {
+    @include relative();
+    inline-size: 100%;
+    box-sizing: border-box;
+    row-gap: calc(2 * var(--frame5-unit));
+    padding-block: calc(var(--frame5-chrome-height) + var(--frame5-section)) var(--frame5-section);
+    pointer-events: none;
+
+    > * { pointer-events: auto; }
+  }
+
+  .frame5-signal__eyebrow {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: var(--frame5-micro) var(--frame5-inner);
+    background: var(--frame5-teal);
+  }
+
+  .frame5-signal__title {
+    grid-column: 1 / -1;
+    display: grid;
+    margin: 0;
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-headline);
+    line-height: var(--frame5-leading-display);
+    letter-spacing: var(--frame5-tracking-display);
+    text-transform: uppercase;
+    pointer-events: none;
+
+    span { justify-self: start; padding-inline-end: var(--frame5-inner); background: var(--frame5-teal); }
+  }
+
+  .frame5-signal__title .frame5-signal__noise {
+    justify-self: end;
+    filter: blur(var(--frame5-noise-blur));
+  }
+
+  /* syx-reuse: checked mol-card — placa opaca sobre el lienzo para que el texto no cruce líneas */
+  .frame5-signal__panel {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: var(--frame5-padding);
+    padding: var(--frame5-padding);
+    background: var(--frame5-teal);
+    border: var(--frame5-stroke) solid var(--frame5-plum);
+
+    p { margin: 0; }
+    > p:first-child { font-size: var(--frame5-type-lead); line-height: 1.25; }
+
+    @media (min-width: 48em) { grid-column: 7 / -1; }
+    @media (min-width: 64em) { grid-column: 8 / -1; }
+  }
+
+  .frame5-signal__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--frame5-padding) var(--frame5-gutter);
+  }
+
+  /* syx-reuse: checked atom-form (no hay range en el registro) — deslizador propio con la tinta del tema */
+  .frame5-signal__range {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: var(--frame5-micro) var(--frame5-inner);
+    flex: 1 1 12rem;
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: var(--frame5-tracking-mono);
+    text-transform: uppercase;
+
+    output { justify-self: end; font-variant-numeric: tabular-nums; }
+
+    input {
+      grid-column: 1 / -1;
+      inline-size: 100%;
+      min-block-size: var(--frame5-touch);
+      margin: 0;
+      background: transparent;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    input::-webkit-slider-runnable-track { block-size: var(--frame5-stroke); background: var(--frame5-plum); }
+    input::-moz-range-track { block-size: var(--frame5-stroke); background: var(--frame5-plum); }
+    input::-webkit-slider-thumb {
+      appearance: none;
+      inline-size: var(--frame5-unit);
+      block-size: var(--frame5-unit);
+      margin-block-start: calc(var(--frame5-stroke) / 2 - var(--frame5-unit) / 2);
+      background: var(--frame5-plum);
+      border: 0;
+    }
+    input::-moz-range-thumb { inline-size: var(--frame5-unit); block-size: var(--frame5-unit); background: var(--frame5-plum); border: 0; border-radius: 0; }
+
+    input:focus-visible { @include focus-ring(var(--frame5-plum)); }
+  }
+
+  .frame5-signal__hint {
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+  }
+
+  // ---------- 05 · Proceso ----------
+  /* syx-reuse: checked mol-card — papel milimetrado con la retícula real de la página */
+  .frame5-process {
+    --frame5-cell: calc(2 * var(--frame5-unit));
+    background:
+      linear-gradient(var(--frame5-line) var(--frame5-hairline), transparent var(--frame5-hairline)) 0 0 / var(--frame5-cell) var(--frame5-cell),
+      linear-gradient(90deg, var(--frame5-line) var(--frame5-hairline), transparent var(--frame5-hairline)) 0 0 / var(--frame5-cell) var(--frame5-cell),
+      var(--frame5-paper);
+    color: var(--frame5-ink);
+    padding-block: calc(var(--frame5-chrome-height) + var(--frame5-section)) calc(2 * var(--frame5-section));
+  }
+
+  .frame5-process__grid { row-gap: calc(2 * var(--frame5-unit)); align-items: start; }
+  .frame5-process__eyebrow { grid-column: 1 / -1; }
+
+  .frame5-process__title {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-title);
+    line-height: 0.95;
+    letter-spacing: var(--frame5-tracking-display);
+
+    span { display: block; }
+    .frame5-process__after { color: var(--frame5-magenta-text); }
+
+    @media (min-width: 64em) { grid-column: 1 / span 5; grid-row: 2; font-size: calc(1.25 * var(--frame5-type-title)); }
+  }
+
+  .frame5-process__figure {
+    grid-column: 1 / -1;
+    margin: 0;
+
+    figcaption {
+      margin-block-start: var(--frame5-inner);
+      font-family: var(--frame5-font-mono);
+      font-size: var(--frame5-size-mono);
+    }
+
+    @media (min-width: 64em) { grid-column: 6 / -1; grid-row: 2 / span 3; }
+  }
+
+  .frame5-process__media {
+    @include relative();
+    aspect-ratio: 16 / 9;
+    background: var(--frame5-paper);
+  }
+
+  .frame5-process__video {
+    @include absolute($top: 0, $left: 0);
+    clip-path: inset(var(--frame5-process-clip, 0%));
+  }
+
+  // El lápiz dibuja en unidades del viewBox (160 × 90): sin vector-effect,
+  // porque non-scaling-stroke rompe pathLength y el trazo no se completa.
+  .frame5-process__pencil {
+    --frame5-pencil-width: 0.45;
+    @include absolute($top: 0, $left: 0);
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: visible;
+    pointer-events: none;
+
+    rect, line {
+      fill: none;
+      stroke: var(--frame5-ink);
+      stroke-width: var(--frame5-pencil-width);
+      stroke-dasharray: 1;
+      stroke-dashoffset: var(--frame5-pencil, 0);
+    }
+
+    line { stroke-width: calc(var(--frame5-pencil-width) / 2); opacity: var(--frame5-construction, 0.5); }
+  }
+
+  /* syx-reuse: checked atom-list — lista numerada de pasos que se encienden en orden */
+  .frame5-process__steps {
+    grid-column: 1 / -1;
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: frame5-step;
+    border-block-start: var(--frame5-hairline) solid var(--frame5-ink);
+
+    li {
+      display: grid;
+      grid-template-columns: calc(2.5 * var(--frame5-unit)) 1fr;
+      align-items: baseline;
+      padding-block: var(--frame5-padding);
+      border-block-end: var(--frame5-hairline) solid var(--frame5-ink);
+      font-size: var(--frame5-type-lead);
+      line-height: 1.2;
+      counter-increment: frame5-step;
+      @include transition(color var(--frame5-duration) var(--frame5-ease));
+
+      &::before {
+        content: counter(frame5-step, decimal-leading-zero);
+        font-family: var(--frame5-font-mono);
+        font-size: var(--frame5-size-mono);
+        letter-spacing: var(--frame5-tracking-mono);
+      }
+    }
+
+    @media (min-width: 64em) { grid-column: 1 / span 5; grid-row: 3; }
+  }
+
+  .js .frame5-process__steps[data-ready] li { color: var(--frame5-mute); }
+  .js .frame5-process__steps[data-ready] li.is-lit { color: var(--frame5-ink); }
+
+  .frame5-process__actions {
+    grid-column: 1 / -1;
+
+    @media (min-width: 64em) { grid-column: 1 / span 5; grid-row: 4; }
+  }
+
+  // ---------- Cierre ----------
+  /* syx-reuse: checked mol-card — cierre a sangre en superficie inversa */
+  .frame5-outro {
+    --semantic-color-text-primary: var(--frame5-ink-inverse);
+    background: var(--frame5-plum);
+    color: var(--frame5-ink-inverse);
+    padding-block: calc(var(--frame5-chrome-height) + var(--frame5-section)) calc(var(--frame5-touch) + var(--frame5-unit));
+    --semantic-focus-ring-color: var(--frame5-teal);
+    --component-disclosure-summary-color: var(--frame5-ink-inverse);
+    --component-disclosure-content-color: var(--frame5-rubor);
+    --component-disclosure-border-color: var(--frame5-rubor);
+    --component-link-primary-color: var(--frame5-teal);
+    --semantic-color-link-default: var(--frame5-teal);
+    --semantic-color-link-hover: var(--frame5-rubor);
+  }
+
+  .frame5-outro__grid { row-gap: calc(2 * var(--frame5-unit)); }
+  .frame5-outro__eyebrow { grid-column: 1 / -1; color: var(--frame5-rubor); }
+
+  .frame5-outro__title {
+    grid-column: 1 / -1;
+    display: grid;
+    margin: 0 0 var(--frame5-unit);
+    font-family: var(--frame5-font-display);
+    font-weight: var(--frame5-weight-display);
+    font-size: var(--frame5-type-display);
+    line-height: var(--frame5-leading-display);
+    letter-spacing: var(--frame5-tracking-display);
+    text-transform: uppercase;
+
+    span:last-child { justify-self: end; color: var(--frame5-teal); }
+
+    @media (min-width: 64em) { font-size: min(var(--frame5-type-display), 13.2vw); }
+  }
+
+  .frame5-outro__services {
+    grid-column: 1 / -1;
+    font-size: var(--frame5-size-body);
+
+    @media (min-width: 48em) { grid-column: 1 / span 6; }
+    @media (min-width: 64em) { grid-column: 1 / span 6; }
+  }
+
+  .frame5-outro__contact {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: var(--frame5-unit);
+    justify-items: start;
+    align-content: start;
+
+    p { margin: 0; max-inline-size: 24em; color: var(--frame5-rubor); font-size: var(--frame5-size-body); }
+    .frame5-outro__mail { font-family: var(--frame5-font-mono); font-size: var(--frame5-size-mono); letter-spacing: var(--frame5-tracking-mono); user-select: all; }
+
+    @media (min-width: 48em) { grid-column: 8 / -1; }
+  }
+
+  .frame5-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--frame5-padding) var(--frame5-gutter);
+    margin-block-start: calc(2 * var(--frame5-unit));
+    padding-block-start: var(--frame5-padding);
+    border-block-start: var(--frame5-hairline) solid var(--frame5-rubor);
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    letter-spacing: var(--frame5-tracking-mono);
+    text-transform: uppercase;
+
+    p { margin: 0; }
+    .frame5-chrome__brand { padding-inline: 0; background: none; color: inherit; }
+  }
+
+  /* syx-reuse: checked atom-link — en el pie va en mayúsculas mono y subrayado siempre (no se distingue solo por color) */
+  .frame5-footer__link {
+    display: inline-block;
+    padding-block: var(--frame5-inner);
+    color: var(--frame5-teal);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+
+    &:hover { color: var(--frame5-ink-inverse); }
+    &:focus-visible { @include focus-ring(var(--frame5-teal)); }
+  }
+
+  // ---------- Visor del reel (mol-dialog) ----------
+  /* syx-reuse: checked mol-dialog — se usa tal cual; aquí solo se ensancha por token y se coloca el vídeo */
+  .frame5-reel {
+    --component-dialog-max-width: min(72rem, calc(100vw - 2 * var(--frame5-margin)));
+  }
+
+  .frame5-reel__video {
+    display: block;
+    inline-size: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--frame5-plum);
+  }
+
+  .frame5-reel__note {
+    margin: var(--frame5-inner) 0 0;
+    font-family: var(--frame5-font-mono);
+    font-size: var(--frame5-size-mono);
+    color: var(--frame5-mute);
+  }
+}
+
+@keyframes frame5-blink { to { opacity: 0.25; } }

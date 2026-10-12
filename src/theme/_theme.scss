@@ -1,0 +1,209 @@
+// ================================================
+// TEMA SYX «frame5» — FRAME V · Moving Matter
+// ================================================
+// Copiado de themes/_template (el contrato mínimo) y rellenado.
+// La paleta NO se inventa: sale de los vídeos del encargo. Se cuantizó el
+// fotograma del reel (color-reel.mp4, s. 40) y el póster en 8–10 colores
+// (median cut) y se llevaron a OKLCH:
+//   #b27a8e rosa empolvado (fondo del set)   → candy
+//   #97045b / #a3045d magenta de los corazones → magenta
+//   #519590 verde agua de los corazones        → teal
+//   #381a37 / #3d051d ciruela de las sombras   → plum
+// Contrastes medidos (WCAG 2.x, docs/qa/palette.json):
+//   plum/paper 15,7 · plum/blush 12,7 · plum/teal 7,7 · plum/candy 7,2
+//   paper/magenta 5,7 · paper/magenta-700 7,5 · mute/paper 6,2
+// ================================================
+
+@use 'grid-tokens' as *;
+@use '../../vendor/syx/scss/abstracts/index' as *;
+
+// Oscuro: superficie ciruela; la marca pasa a rubor y el acento a agua.
+@mixin frame5-dark {
+  @include dark-mode-tokens();
+  --semantic-color-bg-primary: var(--primitive-color-brand-900);
+  --semantic-color-bg-secondary: var(--primitive-color-brand-800);
+  --semantic-color-text-primary: var(--primitive-color-frame-paper);
+  --semantic-color-text-secondary: var(--primitive-color-frame-mute-light);
+  --semantic-color-primary: var(--primitive-color-brand-300);
+  --semantic-color-primary-text: var(--primitive-color-brand-300);
+  --semantic-color-primary-strong: var(--primitive-color-brand-300);
+  --semantic-color-on-primary: var(--semantic-color-ink-dark);
+  --semantic-color-state-hover-primary: var(--primitive-color-frame-paper);
+  --semantic-color-on-state-hover-primary: var(--semantic-color-ink-dark);
+  --semantic-color-link-default: var(--primitive-color-brand-300);
+  --semantic-color-link-hover: var(--primitive-color-frame-paper);
+  --semantic-focus-ring-color: var(--primitive-color-accent-500);
+}
+
+@mixin theme-frame5 {
+  @include frame5-grid-tokens();
+
+  :root {
+    // ------------------------------------------------
+    // 1 · MARCA (primitivos propios del tema)
+    // ------------------------------------------------
+    --primitive-color-brand-300: oklch(0.905 0.035 355); // blush
+    --primitive-color-brand-400: oklch(0.74 0.075 355);  // candy (el set del vídeo)
+    --primitive-color-brand-500: oklch(0.52 0.215 357);  // magenta
+    --primitive-color-brand-700: oklch(0.45 0.19 357);   // magenta, un peldaño (hover)
+    --primitive-color-brand-900: oklch(0.235 0.075 350); // plum (la sombra del vídeo)
+    --primitive-color-brand-800: oklch(0.32 0.07 350);   // plum, hover
+    --primitive-color-accent-500: oklch(0.74 0.095 185); // teal
+    --primitive-color-accent-600: oklch(0.66 0.095 185); // teal, hover
+    --primitive-color-frame-paper: oklch(0.972 0.01 355);
+    --primitive-color-frame-mute: oklch(0.36 0.05 350); // 4,7:1 sobre candy, 10,2:1 sobre papel
+    --primitive-color-frame-mute-light: oklch(0.8 0.04 355);
+    --primitive-color-frame-line: oklch(0.235 0.075 350 / 0.16);
+
+    // Unidad de espacio: un cuarto de la unidad de línea calculada (u/4).
+    --primitive-space-base: calc(var(--frame5-unit) / 4);
+
+    // ------------------------------------------------
+    // 2 · ROLES DE MARCA
+    // ------------------------------------------------
+    // El relleno del botón primario va un peldaño más hondo: papel encima da 7,5:1 (con el 500 eran 5,7).
+    --semantic-color-primary: var(--primitive-color-brand-700);
+    --semantic-color-secondary: var(--primitive-color-brand-900);
+    --semantic-color-tertiary: var(--primitive-color-accent-500);
+    --semantic-color-state-hover-primary: var(--primitive-color-brand-800);
+    --semantic-color-state-hover-secondary: var(--primitive-color-brand-800);
+    --semantic-color-state-hover-tertiary: var(--primitive-color-accent-600);
+
+    // Tinta y texto: la marca escribe en ciruela, no en gris neutro.
+    --semantic-color-ink-dark: var(--primitive-color-brand-900);
+    --semantic-color-ink-light: var(--primitive-color-frame-paper);
+    --semantic-color-primary-text: var(--primitive-color-brand-700);
+    --semantic-color-primary-strong: var(--primitive-color-brand-700);
+
+    // Tinta sobre relleno (≥ 4,5:1 medidos)
+    --semantic-color-on-primary: var(--semantic-color-ink-light);          // 7,5
+    --semantic-color-on-state-hover-primary: var(--semantic-color-ink-light); // 12,2
+    --semantic-color-on-secondary: var(--semantic-color-ink-light);        // 15,7
+    --semantic-color-on-state-hover-secondary: var(--semantic-color-ink-light);
+    --semantic-color-on-tertiary: var(--semantic-color-ink-dark);          // 7,7
+    --semantic-color-on-state-hover-tertiary: var(--semantic-color-ink-dark);
+    // Cuaternario y quinario: los del sistema (verde, amarillo) no llegaban a
+    // 4,5:1 con la tinta ciruela; se toman de la paleta del vídeo.
+    --semantic-color-quaternary: var(--primitive-color-accent-500);
+    --semantic-color-state-hover-quaternary: var(--primitive-color-accent-600);
+    --semantic-color-quinary: var(--primitive-color-brand-400);
+    --semantic-color-on-quaternary: var(--semantic-color-ink-dark);
+    --semantic-color-on-quinary: var(--semantic-color-ink-dark);
+    --semantic-color-on-state-hover-quaternary: var(--semantic-color-ink-dark);
+
+    // ------------------------------------------------
+    // 3 · SUPERFICIES Y TEXTO
+    // ------------------------------------------------
+    --semantic-color-bg-primary: var(--primitive-color-frame-paper);
+    --semantic-color-bg-secondary: var(--primitive-color-brand-300);
+    --semantic-color-bg-tertiary: var(--primitive-color-brand-400);
+    --semantic-color-bg-inverse: var(--primitive-color-brand-900);
+    // Superficie de énfasis en el 700: el texto pequeño medido en píxeles reales sobre el 500
+    // se quedaba en 4,3–4,4:1 por el antialiasing (en teoría 5,7). Sobre el 700: 7,5.
+    --semantic-color-bg-emphasis: var(--primitive-color-brand-700);
+    --semantic-color-on-emphasis: var(--semantic-color-ink-light);
+    --semantic-color-text-primary: var(--primitive-color-brand-900);
+    --semantic-color-text-secondary: var(--primitive-color-frame-mute);
+    --semantic-color-text-tertiary: var(--primitive-color-frame-mute);
+    --semantic-color-text-inverse: var(--primitive-color-frame-paper);
+    --semantic-color-border-subtle: var(--primitive-color-frame-line);
+    --semantic-color-border-default: var(--primitive-color-brand-900);
+    --semantic-color-border-strong: var(--primitive-color-brand-900);
+    --semantic-color-selection-bg: var(--primitive-color-accent-500);
+    // Código: superficie ciruela y sintaxis con la paleta (≥ 7:1 todas)
+    --semantic-color-code-bg: var(--primitive-color-brand-900);
+    --semantic-color-code-fg: var(--primitive-color-frame-paper);
+    --semantic-color-code-comment: var(--primitive-color-brand-400);
+    --semantic-color-code-tag: var(--primitive-color-accent-500);
+    --semantic-color-code-attr: var(--primitive-color-brand-300);
+    --semantic-color-code-val: var(--primitive-color-brand-400);
+    --semantic-color-code-fn: var(--primitive-color-accent-500);
+    --semantic-color-code-inline-bg: var(--primitive-color-brand-300);
+    --semantic-color-code-inline-fg: var(--primitive-color-brand-900);
+    --semantic-color-code-inline-border: var(--primitive-color-brand-400);
+    --semantic-color-selection-text: var(--primitive-color-brand-900);
+    --semantic-focus-ring-color: var(--primitive-color-brand-700);
+
+    // Colores de categoría: los cinco estados de la marca, para que la app los
+    // lea como roles y no como primitivos (R01).
+    --semantic-color-category-1-bg: var(--primitive-color-brand-300);
+    --semantic-color-category-1-fg: var(--primitive-color-brand-900);
+    --semantic-color-category-2-bg: var(--primitive-color-brand-400);
+    --semantic-color-category-2-fg: var(--primitive-color-brand-900);
+    --semantic-color-category-3-bg: var(--primitive-color-brand-500);
+    --semantic-color-category-3-fg: var(--primitive-color-frame-paper);
+    --semantic-color-category-4-bg: var(--primitive-color-accent-500);
+    --semantic-color-category-4-fg: var(--primitive-color-brand-900);
+    --semantic-color-category-5-bg: var(--primitive-color-brand-900);
+    --semantic-color-category-5-fg: var(--primitive-color-frame-paper);
+    --semantic-color-category-6-bg: var(--primitive-color-frame-paper);
+    --semantic-color-category-6-fg: var(--primitive-color-brand-900);
+
+    // ------------------------------------------------
+    // 4 · FORMA — el marco es recto: radio 0 en todo
+    // ------------------------------------------------
+    --semantic-border-radius-sm: 0;
+    --semantic-border-radius-default: 0;
+    --semantic-border-radius-lg: 0;
+    --theme-radius: 0;
+    --layout-max-width: 90rem;
+    --layout-gap-1: var(--frame5-gutter);
+    --layout-gap-2: var(--frame5-gutter);
+    --layout-gap-3: var(--frame5-gutter);
+    --layout-gap-4: var(--frame5-gutter);
+    --layout-gap-5: var(--frame5-gutter);
+    --layout-pad-1: var(--frame5-margin);
+    --layout-pad-2: var(--frame5-margin);
+    --layout-pad-3: var(--frame5-margin);
+    --layout-pad-4: var(--frame5-margin);
+    --layout-pad-5: var(--frame5-margin);
+
+    // ------------------------------------------------
+    // 5 · TIPOGRAFÍA — tres voces, todas de las que trae SYX
+    // ------------------------------------------------
+    // Syne (display ancha), Inter (texto), DM Mono (el visor de cámara).
+    --semantic-font-family-primary: "Inter", "Inter Fallback", Arial, sans-serif;
+    --semantic-font-family-primary-bold: var(--semantic-font-family-primary);
+    --semantic-font-family-heading: "Syne", "Syne Fallback", Arial, sans-serif;
+    --semantic-font-family-heading-md: var(--semantic-font-family-heading);
+    --semantic-font-family-mono: "DM Mono", "DM Mono Fallback", "Courier New", monospace;
+    --semantic-font-weight-heading: 700;
+    --semantic-font-weight-primary-bold: 500;
+
+    // ------------------------------------------------
+    // 6 · ICONOS
+    // ------------------------------------------------
+    --icon-arrow-default: var(--lc-icon-chevron-right);
+    --icon-arrow-double: var(--lc-icon-chevrons-right);
+    --icon-content-bars: var(--lc-icon-menu);
+    --icon-rrss-email: var(--lc-icon-mail);
+    --icon-user-interface-cancel: var(--lc-icon-x);
+    --icon-user-interface-exclamation-mark: var(--lc-icon-warning);
+    --icon-user-interface-home: var(--lc-icon-home);
+    --icon-user-interface-tick: var(--lc-icon-check);
+  }
+
+  // Modo oscuro: FRAME V es una pieza de dirección de arte con un color por
+  // capítulo; cada capítulo ya alterna claro y oscuro. El oscuro del sistema
+  // se respeta en los controles (los dos puntos de entrada del contrato), y
+  // la página se declara clara (data-theme="light") como hizo FRAME IV.
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      @include frame5-dark();
+    }
+  }
+
+  :root[data-theme="dark"] {
+    @include frame5-dark();
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+}
+
+@mixin theme-frame5-fonts {
+  @include syx-font("Syne", 700);
+  @include syx-font("Inter", 400 500);
+  @include syx-font("DM Mono", 400 500);
+}

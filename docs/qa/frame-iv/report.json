@@ -1,0 +1,630 @@
+{
+ "label": "FRAME IV",
+ "url": "http://localhost:8004/",
+ "desktop": {
+  "positions": 41,
+  "textSamples": 418,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 77,
+  "contrastFailsUnique": 21,
+  "contrastWorst": [
+   {
+    "y": 1155,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1155,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1155,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1320,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1320,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1320,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1485,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1485,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1485,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1650,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1650,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1650,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   }
+  ],
+  "overlapEvents": 10,
+  "overlapPairs": [
+   {
+    "y": 0,
+    "a": "F",
+    "b": "Las buenas ideasno se quedan quietas."
+   },
+   {
+    "y": 0,
+    "a": "F",
+    "b": "DESLÍZATE. TODO VA A CAMBIAR. ↓"
+   },
+   {
+    "y": 5775,
+    "a": "F",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 5775,
+    "a": "R",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 5775,
+    "a": "A",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 5775,
+    "a": "M",
+    "b": "E"
+   }
+  ],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 0
+ },
+ "laptop": {
+  "positions": 41,
+  "textSamples": 403,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 73,
+  "contrastFailsUnique": 21,
+  "contrastWorst": [
+   {
+    "y": 955,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 955,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 955,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1092,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1092,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1092,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1228,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1228,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1228,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1365,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1365,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1365,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   }
+  ],
+  "overlapEvents": 10,
+  "overlapPairs": [
+   {
+    "y": 0,
+    "a": "F",
+    "b": "Las buenas ideasno se quedan quietas."
+   },
+   {
+    "y": 0,
+    "a": "F",
+    "b": "DESLÍZATE. TODO VA A CAMBIAR. ↓"
+   },
+   {
+    "y": 4639,
+    "a": "F",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 4639,
+    "a": "R",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 4639,
+    "a": "A",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 4639,
+    "a": "M",
+    "b": "E"
+   }
+  ],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 0
+ },
+ "mobile": {
+  "positions": 41,
+  "textSamples": 391,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 60,
+  "contrastFailsUnique": 9,
+  "contrastWorst": [
+   {
+    "y": 0,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 0,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 86,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 86,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 172,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 172,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 258,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 258,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 344,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 344,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 344,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 430,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   }
+  ],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 0
+ },
+ "reduced": {
+  "positions": 41,
+  "textSamples": 393,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 48,
+  "contrastFailsUnique": 7,
+  "contrastWorst": [
+   {
+    "y": 195,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 292,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 389,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 486,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 486,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 584,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 584,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 681,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 681,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 778,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 778,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   },
+   {
+    "y": 875,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": false
+   }
+  ],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 0
+ },
+ "dark": {
+  "positions": 41,
+  "textSamples": 418,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 78,
+  "contrastFailsUnique": 22,
+  "contrastWorst": [
+   {
+    "y": 1155,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1155,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1155,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1320,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1320,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1320,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1485,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1485,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1485,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1650,
+    "text": "02 / LA IDEA TOMA EL CONTROL",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1650,
+    "text": "El marco ordena.La idea lo transforma.",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   },
+   {
+    "y": 1650,
+    "text": "No diseñamos para llenar una pantalla. D",
+    "ratio": 1.01,
+    "need": 4.5,
+    "fixed": true
+   }
+  ],
+  "overlapEvents": 10,
+  "overlapPairs": [
+   {
+    "y": 0,
+    "a": "F",
+    "b": "Las buenas ideasno se quedan quietas."
+   },
+   {
+    "y": 0,
+    "a": "F",
+    "b": "DESLÍZATE. TODO VA A CAMBIAR. ↓"
+   },
+   {
+    "y": 5775,
+    "a": "F",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 5775,
+    "a": "R",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 5775,
+    "a": "A",
+    "b": "Escuchar. Cuestionar. Dibujar.Construir "
+   },
+   {
+    "y": 5775,
+    "a": "M",
+    "b": "E"
+   }
+  ],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 0
+ },
+ "axeDesktop": [],
+ "axeMobile": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "nodes": 4,
+   "help": "Elements must meet minimum color contrast ratio thresholds"
+  }
+ ],
+ "keyboard": {
+  "stops": 13,
+  "notInView": [],
+  "noRing": [],
+  "under24": [],
+  "under44": [
+   "FRAME® / IV"
+  ]
+ },
+ "perf": {
+  "initialBytesKB": 462,
+  "requests": 11,
+  "byTypeKB": {
+   "document": 8,
+   "stylesheet": 196,
+   "font": 60,
+   "image": 50,
+   "script": 147
+  },
+  "lcpMs": 3496,
+  "cls": 1.1083,
+  "domNodes": 157,
+  "scrollScriptMs": 113,
+  "scrollLayoutMs": 39,
+  "scrollStyleMs": 65,
+  "frameP95ms": 33.4,
+  "framesOver50ms": 3,
+  "sweepMs": 4062
+ }
+}

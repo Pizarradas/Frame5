@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FRAME IV frente a FRAME V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap">
+<style>
+/* Layout: un informe de laboratorio de una sola columna (66ch) con láminas comparativas a doble columna que se apilan en móvil. */
+:root {
+  --paper: #fcf3f6;
+  --sheet: #ffffff;
+  --ink: #360b23;
+  --ink-soft: #5c3a4b;
+  --line: #e4cdd6;
+  --accent: #9e0057;
+  --teal: #1f6f68;
+  --fail: #b3261e;
+  --fail-bg: #fde4e2;
+  --pass: #1f6f45;
+  --pass-bg: #ddf3e6;
+  --font-display: "Syne", "Arial Black", Arial, sans-serif;
+  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "Courier New", monospace;
+  --measure: 66ch;
+  --wide: 76rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1c0612; --sheet: #2a0d1d; --ink: #fcf3f6; --ink-soft: #d9bccb; --line: #4a2236;
+    --accent: #f4a7c8; --teal: #7fd6cb; --fail: #ffb4ab; --fail-bg: #4a1714; --pass: #8fdcae; --pass-bg: #123522;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1c0612; --sheet: #2a0d1d; --ink: #fcf3f6; --ink-soft: #d9bccb; --line: #4a2236;
+  --accent: #f4a7c8; --teal: #7fd6cb; --fail: #ffb4ab; --fail-bg: #4a1714; --pass: #8fdcae; --pass-bg: #123522;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-text); font-size: 1rem; line-height: 1.55; }
+.page { padding-inline: clamp(1rem, 4vw, 3rem); padding-block: clamp(2rem, 6vw, 4.5rem) 4rem; display: grid; gap: clamp(2.5rem, 6vw, 4.5rem); }
+.page > * { width: 100%; max-width: var(--wide); margin-inline: auto; min-width: 0; }
+.prose { max-width: var(--measure); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 0.95; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.6rem, 8vw, 6rem); text-transform: uppercase; }
+h1 em { font-style: normal; color: var(--accent); }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.5rem); }
+h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+p { margin: 0; }
+.label { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.stack { display: grid; gap: 1rem; }
+.lead { font-size: clamp(1.1rem, 1.6vw, 1.3rem); line-height: 1.45; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Cabecera */
+header.top { display: grid; gap: 1.5rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-family: var(--font-mono); font-size: 0.85rem; }
+
+/* Marcador */
+.score { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); border-top: 2px solid var(--ink); }
+.score > div { display: grid; gap: 0.35rem; padding: 1.1rem 1rem 1.2rem 0; border-bottom: 1px solid var(--line); }
+.score b { font-family: var(--font-display); font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.score .vs { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.score .vs s { color: var(--fail); text-decoration-thickness: 1px; }
+
+/* Tabla */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; min-width: 40rem; font-size: 0.92rem; }
+th, td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chip { display: inline-block; padding: 0.1rem 0.45rem; font-family: var(--font-mono); font-size: 0.78rem; white-space: nowrap; }
+.chip.bad { background: var(--fail-bg); color: var(--fail); }
+.chip.good { background: var(--pass-bg); color: var(--pass); }
+.chip.even { border: 1px solid var(--line); color: var(--ink-soft); }
+tbody tr:last-child td { border-bottom: 0; }
+
+/* Láminas */
+.plate { display: grid; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 52rem) { .pair { grid-template-columns: 1fr; } }
+figure { margin: 0; display: grid; gap: 0.5rem; min-width: 0; }
+figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line); background: var(--sheet); }
+figcaption { font-size: 0.9rem; color: var(--ink-soft); display: grid; gap: 0.25rem; }
+figcaption .label { color: var(--ink); }
+.strip { overflow-x: auto; border: 1px solid var(--line); background: var(--sheet); }
+.strip img { display: block; max-width: none; height: clamp(220px, 34vw, 360px); width: auto; }
+
+/* Listas */
+ul.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+ul.list li { display: grid; grid-template-columns: 1.4rem 1fr; gap: 0.4rem; }
+ul.list li::before { content: "—"; color: var(--accent); font-family: var(--font-mono); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 2rem; }
+.cols > * { min-width: 0; }
+code { font-family: var(--font-mono); font-size: 0.88em; }
+footer.end { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <p class="label">Agencia FRAME · mismo encargo, mismo texto, mismos vídeos · 12 oct 2026</p>
+  <h1>FRAME IV <em>frente a</em> FRAME V</h1>
+  <div class="prose stack">
+    <p class="lead">FRAME IV es la exploración que hizo otra IA para la agencia. FRAME V es la misma pieza rehecha por Claude sobre SYX y su sistema de retícula. Las dos se midieron en el mismo Chromium, con el mismo script, en las mismas posiciones de scroll y con los mismos umbrales.</p>
+    <p>El README de FRAME IV reconoce que no tuvo navegador para comprobar el resultado. Aquí sí lo hubo, y la medición encontró texto invisible y escenas que se pisan. También encontró fallos en FRAME V, que se corrigieron antes de entregarlo.</p>
+  </div>
+  <div class="links">
+    <a href="https://claude.ai/artifact/MnTW533VM54ifkCEEXqAV7">Abrir FRAME V ↗</a>
+    <a href="https://github.com/Pizarradas/syx">SYX ↗</a>
+    <a href="https://github.com/Pizarradas/skill--grid-system">GRID ↗</a>
+  </div>
+</header>
+
+<section class="stack" aria-labelledby="h-score">
+  <h2 id="h-score">El resultado</h2>
+  <div class="score">
+    <div><span class="label">Fallos de contraste medidos</span><b>0</b><span class="vs">FRAME IV: <s>336</s> · en 5 configuraciones</span></div>
+    <div><span class="label">Textos que se pisan</span><b>0</b><span class="vs">FRAME IV: <s>30</s> eventos</span></div>
+    <div><span class="label">Salto de maquetación (CLS)</span><b>0,008</b><span class="vs">FRAME IV: <s>1,11</s> · bueno &lt; 0,1</span></div>
+    <div><span class="label">Mayor pintado (LCP)</span><b>0,33 s</b><span class="vs">FRAME IV: <s>3,5 s</s></span></div>
+  </div>
+</section>
+
+<section class="stack" aria-labelledby="h-table">
+  <h2 id="h-table">Medición completa</h2>
+  <p class="prose">Contraste medido en los píxeles que pinta el navegador, texto a texto, en 41 posiciones de scroll por configuración. Cuenta lo que se ve en pantalla, transiciones incluidas, no lo que dice la hoja de estilos.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Prueba</th><th scope="col">FRAME IV</th><th scope="col">FRAME V</th><th scope="col">Lectura</th></tr></thead>
+      <tbody>
+        <tr><td>Contraste · escritorio 1440×900</td><td class="num">77 fallos · 21 textos</td><td class="num">0 · 1.042 muestras</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>Contraste · portátil 1280×720</td><td class="num">73 fallos · 21 textos</td><td class="num">0 · 995 muestras</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>Contraste · móvil 390×844</td><td class="num">60 fallos · 9 textos</td><td class="num">0 · 697 muestras</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>Contraste · movimiento reducido</td><td class="num">48 fallos · 7 textos</td><td class="num">0 · 1.156 muestras</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>Contraste · sistema en oscuro</td><td class="num">78 fallos · 22 textos</td><td class="num">0 · 1.042 muestras</td><td><span class="chip good">V gana</span> IV no cambia con el modo</td></tr>
+        <tr><td>Textos que se pisan (incluye texto decorativo pintado)</td><td class="num">30</td><td class="num">0</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>axe-core WCAG 2.2 AA · escritorio / móvil</td><td class="num">0 / 4 nodos</td><td class="num">0 / 0</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>CLS · LCP (Chromium sin red lenta)</td><td class="num">1,11 · 3.496 ms</td><td class="num">0,008 · 332 ms</td><td><span class="chip good">V gana</span></td></tr>
+        <tr><td>Teclado: foco visible y en pantalla</td><td class="num">13 de 13</td><td class="num">20 de 20</td><td><span class="chip even">Empate</span> V tiene más controles</td></tr>
+        <tr><td>Objetivo táctil ≥ 24 px (WCAG 2.5.8)</td><td class="num">todos</td><td class="num">todos</td><td><span class="chip even">Empate</span> V: 3 controles bajo 44 px</td></tr>
+        <tr><td><code>syx-scan</code> de la app</td><td class="num">0 hallazgos*</td><td class="num">0 hallazgos</td><td><span class="chip even">Empate</span></td></tr>
+        <tr><td>Contraste del tema SYX (<code>check-contraste</code>)</td><td class="num">436 · 0 fallos*</td><td class="num">436 · 0 fallos</td><td><span class="chip even">Empate</span></td></tr>
+        <tr><td>CSS de SYX enviado</td><td class="num">188 KB</td><td class="num">125 KB</td><td><span class="chip good">V gana</span> solo los 5 componentes usados</td></tr>
+        <tr><td>Script durante un recorrido completo</td><td class="num">113 ms</td><td class="num">248 ms</td><td><span class="chip bad">IV gana</span> el lienzo de la señal cuesta</td></tr>
+        <tr><td>Nodos del DOM</td><td class="num">157</td><td class="num">243</td><td><span class="chip bad">IV gana</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="label">* Cifras declaradas en el README de FRAME IV; su snapshot de SYX no venía en el material.</p>
+</section>
+
+<section class="stack" aria-labelledby="h-plates">
+  <h2 id="h-plates">Capítulo a capítulo</h2>
+  <p class="prose">Capturas reales a 1440×900 en el mismo punto de cada recorrido. Los vídeos aparecen como póster: el Chromium de pruebas no reproduce H.264.</p>
+
+  <article class="plate">
+    <h3>01 · Fuera de cuadro</h3>
+    <div class="pair">
+      <figure><img src="img/iv-00.jpg" alt="FRAME IV, apertura: titular en blanco y amarillo sobre el vídeo oscurecido al 82 %" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME IV</span>El vídeo rosa queda bajo un velo negro del 82 % y una F decorativa flota sin relación con nada.</figcaption></figure>
+      <figure><img src="img/v-01.jpg" alt="FRAME V, apertura a media animación: el marco de vídeo crece y el titular sale por los laterales" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME V</span>El título es literal: un marco con el vídeo a todo color crece hasta salirse del visor y los dos renglones salen por los lados.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="plate">
+    <h3>02 · La idea toma el control</h3>
+    <div class="pair">
+      <figure><img src="img/iv-01.jpg" alt="FRAME IV, capítulo 2: solo el titular y un signo más; el resto del texto no se ve" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME IV · texto invisible</span>El rótulo, la nota y el párrafo del manifiesto se pintan en papel sobre papel: 1,01:1 en las cinco configuraciones.</figcaption></figure>
+      <figure><img src="img/v-02.jpg" alt="FRAME V, capítulo 2: titular en ciruela con PROVOCA en verde agua y el manifiesto debajo" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME V</span>El manifiesto se enciende palabra a palabra al leerlo. Las palabras sin leer siguen en 7,2:1, así que el efecto no rompe el contraste.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="plate">
+    <h3>03 · Color is a feeling</h3>
+    <div class="pair">
+      <figure><img src="img/iv-03.jpg" alt="FRAME IV, transición al capítulo 4: la imagen tapada por un velo oliva y el titular siguiente asomando" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME IV · fundido sucio</span>En el cambio de escena el velo amarillo cae sobre la foto rosa y sale un oliva. El titular de la escena siguiente asoma por la derecha.</figcaption></figure>
+      <figure><img src="img/v-03.jpg" alt="FRAME V, capítulo 3: cinco persianas con los colores de la paleta y su valor OKLCH sobre el vídeo" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME V</span>Las persianas llevan los colores del tema con su valor OKLCH y se abren sobre el vídeo del que se extrajeron.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="plate">
+    <h3>04 · Signal to noise</h3>
+    <div class="pair">
+      <figure><img src="img/iv-04.jpg" alt="FRAME IV, capítulo 4: fondo amarillo con anillos; el texto pequeño apenas se distingue" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME IV · texto invisible</span>«Reducir el ruido…» y el rótulo van en papel sobre amarillo, cerca de 1,2:1. El laboratorio de señal está escondido en un diálogo.</figcaption></figure>
+      <figure><img src="img/v-04.jpg" alt="FRAME V, capítulo 4: líneas de cresta en ciruela sobre verde agua que se ordenan en una señal" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME V</span>La señal está en la página: el scroll ordena el ruido, el puntero lo vuelve a agitar y hay deslizador y botón para congelarla.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="plate">
+    <h3>05 · Primero, la pregunta</h3>
+    <div class="pair">
+      <figure><img src="img/iv-05.jpg" alt="FRAME IV, capítulo 5: letras sueltas de FRAME flotando encima del texto del proceso" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME IV · se pisan</span>Las letras de FRAME se reúnen encima del texto del proceso y de su botón.</figcaption></figure>
+      <figure><img src="img/v-05.jpg" alt="FRAME V, capítulo 5: papel milimetrado, titular y un marco dibujado a lápiz alrededor del vídeo" width="1200" height="750" loading="lazy"><figcaption><span class="label">FRAME V</span>Sobre la retícula real de la página, el marco se dibuja a lápiz como en el vídeo y después se abre. Los cinco pasos se encienden en orden.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="plate">
+    <h3>Móvil, recorrido completo</h3>
+    <p class="label">FRAME IV</p>
+    <div class="strip"><img src="img/mob-iv.jpg" alt="FRAME IV en móvil: once capturas a lo largo del scroll" width="2500" height="476" loading="lazy"></div>
+    <p class="label">FRAME V</p>
+    <div class="strip"><img src="img/mob-v.jpg" alt="FRAME V en móvil: once capturas a lo largo del scroll" width="2500" height="476" loading="lazy"></div>
+  </article>
+</section>
+
+<section class="cols" aria-label="Diferencias de fondo">
+  <div class="stack">
+    <h2>Lo que no sale en las cifras</h2>
+    <ul class="list">
+      <li><span>La paleta no se eligió: se cuantizaron fotogramas del reel y se llevaron a OKLCH. Ciruela, magenta, agua y caramelo son los corazones del vídeo.</span></li>
+      <li><span>La retícula se calculó con <code>gridcalc.py</code> a partir de las fuentes reales y del texto real de la página.</span></li>
+      <li><span>SYX se usa como pide su contrato: <code>mol-dialog</code> para el reel en lugar de un visor propio, tokens <code>--frame5-*</code> que solo leen semánticos y una línea <code>syx-reuse</code> en cada bloque propio.</span></li>
+      <li><span>Hay modo oscuro real y un único control que pausa vídeo, lienzo y coreografía. Sin JavaScript la página se lee entera.</span></li>
+    </ul>
+  </div>
+  <div class="stack">
+    <h2>Dónde FRAME V no gana</h2>
+    <ul class="list">
+      <li><span>El lienzo de la señal duplica el coste de script durante el scroll (248 ms frente a 113 ms en un recorrido completo).</span></li>
+      <li><span>«TO NOISE.» entra desenfocado a propósito; es texto grande y se aclara al llegar, pero durante ese tramo se lee peor.</span></li>
+      <li><span>Tres controles miden menos de 44 px (cumplen el mínimo AA de 24 px).</span></li>
+      <li><span>Sin medir: reproducción real de vídeo, rendimiento en móviles reales y lector de pantalla real.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="stack prose" aria-labelledby="h-method">
+  <h2 id="h-method">Cómo se midió</h2>
+  <p>Playwright 1.56 con Chromium. Cinco configuraciones: 1440×900, 1280×720, 390×844 táctil, movimiento reducido y sistema en oscuro. En cada una, 41 posiciones de scroll repartidas por toda la página.</p>
+  <p>Contraste: para cada texto visible que llega al lector, se recortan sus píxeles de la captura, se separan en dos grupos (texto y fondo) y se calcula la razón WCAG entre ellos. Umbral 4,5:1, o 3:1 en texto grande. Se descartan los textos cortados por el borde de la ventana.</p>
+  <p>Textos que se pisan: cajas de texto de bloques distintos, decorativos incluidos, que se solapan más de un 15 %. axe-core 4 con las etiquetas WCAG 2.2 AA y buenas prácticas. CLS y LCP con PerformanceObserver; coste de scroll con las métricas de rendimiento de Chrome.</p>
+</section>
+
+<footer class="end">FRAME V construido sobre SYX v5.0.0 (7deff28) y GRID · Informe generado a partir de docs/qa/report.json de cada proyecto.</footer>
+</div>
+
+</body>
+</html>

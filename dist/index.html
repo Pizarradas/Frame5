@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es" data-tone="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FRAME V — Moving Matter</title>
+<meta name="description" content="FRAME V: una idea sale del cuadro y cambia de forma, de escala y de color mientras la recorres.">
+<meta name="theme-color" content="#fcf3f6">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/syx-frame5.css">
+<link rel="stylesheet" href="assets/frame5.css">
+</head>
+<body class="frame5-page">
+<a class="frame5-skip" href="#contenido">Saltar al contenido</a>
+
+<header class="frame5-chrome">
+  <a class="frame5-chrome__brand" href="#c1">FRAME<sup>V</sup></a>
+  <p class="frame5-chrome__now"><span class="frame5-chrome__rec" aria-hidden="true"></span><span id="now" aria-live="polite">01 — Fuera de cuadro</span></p>
+  <button class="frame5-chrome__motion" id="motion" type="button" aria-pressed="false">Pausar movimiento</button>
+</header>
+
+<div class="frame5-viewfinder" aria-hidden="true">
+  <span class="frame5-viewfinder__corner" data-corner="tl"></span>
+  <span class="frame5-viewfinder__corner" data-corner="tr"></span>
+  <span class="frame5-viewfinder__corner" data-corner="bl"></span>
+  <span class="frame5-viewfinder__corner" data-corner="br"></span>
+  <span class="frame5-viewfinder__tc" id="timecode">TC 00:00:00:00</span>
+  <span class="frame5-viewfinder__meta">24 FPS · 1:1 · ISO 400</span>
+</div>
+
+<nav class="frame5-index" aria-label="Capítulos">
+  <ol>
+    <li><a href="#c1" aria-current="true"><span>01</span> Fuera de cuadro</a></li>
+    <li><a href="#c2"><span>02</span> La idea</a></li>
+    <li><a href="#c3"><span>03</span> Color</a></li>
+    <li><a href="#c4"><span>04</span> Señal</a></li>
+    <li><a href="#c5"><span>05</span> Proceso</a></li>
+  </ol>
+</nav>
+
+<main id="contenido">
+
+  <!-- 01 · El marco se abre hasta salirse de cuadro -->
+  <section class="frame5-hero" id="c1" data-chapter="1" data-tone="light" data-label="01 — Fuera de cuadro" aria-labelledby="t1">
+    <div class="frame5-hero__stage">
+      <div class="frame5-hero__window">
+        <video class="frame5-hero__video" data-autoplay muted loop playsinline preload="metadata" poster="assets/video/color-hero-poster.jpg" aria-hidden="true">
+          <source src="assets/video/color-background.mp4" type="video/mp4">
+        </video>
+      </div>
+      <span class="frame5-hero__corner" data-corner="tl" aria-hidden="true"></span>
+      <span class="frame5-hero__corner" data-corner="tr" aria-hidden="true"></span>
+      <span class="frame5-hero__corner" data-corner="bl" aria-hidden="true"></span>
+      <span class="frame5-hero__corner" data-corner="br" aria-hidden="true"></span>
+      <p class="frame5-eyebrow frame5-hero__eyebrow">01 / Fuera del marco</p>
+      <h1 class="frame5-hero__title" id="t1">
+        <span class="frame5-hero__line" data-line="a">Fuera</span>
+        <span class="frame5-hero__line" data-line="b">de cuadro.</span>
+      </h1>
+      <div class="frame5-hero__intro">
+        <p>Las buenas ideas no se quedan quietas.</p>
+        <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-lg" type="button" data-reel="color">Ver reel completo <span aria-hidden="true">↗</span></button>
+      </div>
+      <p class="frame5-hero__hint" aria-hidden="true">Desliza — el cuadro se abre</p>
+    </div>
+  </section>
+
+  <!-- 02 · Manifiesto: la frase se enciende al leerla -->
+  <section class="frame5-manifesto" id="c2" data-chapter="2" data-tone="dark" data-label="02 — La idea toma el control" aria-labelledby="t2">
+    <div class="frame5-wrap frame5-manifesto__grid">
+      <p class="frame5-eyebrow frame5-manifesto__eyebrow">02 / La idea toma el control</p>
+      <h2 class="frame5-manifesto__title" id="t2">
+        <span class="frame5-manifesto__line" data-dir="-1">No es la forma.</span>
+        <span class="frame5-manifesto__line" data-dir="1">Es lo que <em>provoca.</em></span>
+      </h2>
+      <aside class="frame5-manifesto__note">
+        <span class="frame5-manifesto__plus" aria-hidden="true"></span>
+        <p>El marco ordena.<br>La idea lo transforma.</p>
+      </aside>
+      <div class="frame5-manifesto__text" data-reveal-words>
+        <p>Nos interesa lo que ocurre cuando una marca deja de ocupar espacio y empieza a tener presencia. Una idea clara. Un lenguaje propio. Algo que se queda contigo.</p>
+        <p>No diseñamos para llenar una pantalla. Diseñamos para cambiar lo que ocurre en ella: una voz propia, una sensación, algo que recuerdas después.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Color: las persianas de la paleta se abren sobre el vídeo del que salen -->
+  <section class="frame5-color" id="c3" data-chapter="3" data-tone="dark" data-label="03 — La emoción tiene forma" aria-labelledby="t3">
+    <div class="frame5-color__stage">
+      <div class="frame5-color__media">
+        <video class="frame5-color__video" data-autoplay muted loop playsinline preload="none" poster="assets/video/color-pile-poster.jpg" aria-hidden="true">
+          <source src="assets/video/color-pile.mp4" type="video/mp4">
+        </video>
+        <div class="frame5-color__blinds" aria-hidden="true">
+          <span class="frame5-color__blind" data-swatch="magenta"><b>Magenta</b> <i>oklch .52 .215 357</i></span>
+          <span class="frame5-color__blind" data-swatch="teal"><b>Agua</b> <i>oklch .74 .095 185</i></span>
+          <span class="frame5-color__blind" data-swatch="plum"><b>Ciruela</b> <i>oklch .235 .075 350</i></span>
+          <span class="frame5-color__blind" data-swatch="candy"><b>Caramelo</b> <i>oklch .74 .075 355</i></span>
+          <span class="frame5-color__blind" data-swatch="blush"><b>Rubor</b> <i>oklch .905 .035 355</i></span>
+        </div>
+        <p class="frame5-color__caption" aria-hidden="true">Feel something.</p>
+      </div>
+      <div class="frame5-color__copy">
+        <p class="frame5-eyebrow">03 / La emoción tiene forma</p>
+        <h2 class="frame5-color__title" id="t3">Color is a <span>feeling.</span></h2>
+        <p>Materia que se encuentra. Contraste que cambia el ritmo. Una identidad que se siente.</p>
+        <p class="frame5-color__proof">Cada color de esta página está sacado de este vídeo: cuantizado fotograma a fotograma y llevado a OKLCH.</p>
+        <button class="atom-btn atom-btn--tertiary atom-btn--filled" type="button" data-reel="color">Explorar Color in Motion <span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Señal: el ruido se ordena con el scroll; el puntero lo vuelve a agitar -->
+  <section class="frame5-signal" id="c4" data-chapter="4" data-tone="light" data-label="04 — Encuentra tu señal" aria-labelledby="t4">
+    <canvas class="frame5-signal__canvas" aria-hidden="true"></canvas>
+    <div class="frame5-wrap frame5-signal__grid">
+      <p class="frame5-eyebrow frame5-signal__eyebrow">04 / Encuentra tu señal</p>
+      <h2 class="frame5-signal__title" id="t4"><span class="frame5-signal__clean">Signal</span> <span class="frame5-signal__noise">to noise.</span></h2>
+      <div class="frame5-signal__panel">
+        <p>Reducir el ruido. Amplificar lo que importa.</p>
+        <div class="frame5-signal__controls">
+          <label class="frame5-signal__range" for="noise">Ruido <output id="noise-out" for="noise">35</output>
+            <input id="noise" type="range" min="0" max="100" value="35">
+          </label>
+          <button class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-sm" id="signal-toggle" type="button" aria-pressed="false">Congelar señal</button>
+        </div>
+        <p class="frame5-signal__hint">Pasa el puntero por las líneas: el ruido vuelve donde lo tocas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Proceso: el marco se dibuja a lápiz, como en el vídeo -->
+  <section class="frame5-process" id="c5" data-chapter="5" data-tone="light" data-label="05 — El movimiento empieza en una línea" aria-labelledby="t5">
+    <div class="frame5-wrap frame5-process__grid">
+      <p class="frame5-eyebrow frame5-process__eyebrow">05 / El movimiento empieza en una línea</p>
+      <h2 class="frame5-process__title" id="t5"><span>Primero,</span> <span>la pregunta.</span> <span class="frame5-process__after">Después,</span> <span class="frame5-process__after">el impacto.</span></h2>
+      <figure class="frame5-process__figure">
+        <div class="frame5-process__media">
+          <video class="frame5-process__video" data-autoplay muted loop playsinline preload="none" poster="assets/video/process-poster.jpg" aria-hidden="true">
+            <source src="assets/video/process.mp4" type="video/mp4">
+          </video>
+          <svg class="frame5-process__pencil" viewBox="0 0 160 90" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="159" height="89" pathLength="1"/>
+            <line x1="53.3" y1="-4" x2="53.3" y2="94" pathLength="1"/>
+            <line x1="106.6" y1="-4" x2="106.6" y2="94" pathLength="1"/>
+            <line x1="-4" y1="30" x2="164" y2="30" pathLength="1"/>
+            <line x1="-4" y1="60" x2="164" y2="60" pathLength="1"/>
+          </svg>
+        </div>
+        <figcaption>First Principles — una mano, una regla y la retícula de esta página.</figcaption>
+      </figure>
+      <ol class="frame5-process__steps">
+        <li>Escuchar.</li>
+        <li>Cuestionar.</li>
+        <li>Dibujar.</li>
+        <li>Construir desde lo que importa.</li>
+        <li>Llevarlo un poco más lejos.</li>
+      </ol>
+      <div class="frame5-process__actions">
+        <button class="atom-btn atom-btn--secondary atom-btn--filled" type="button" data-reel="process">Ver proceso <span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="frame5-outro" id="cierre" data-chapter="6" data-tone="dark" data-label="El siguiente frame es tuyo" aria-labelledby="t6">
+    <div class="frame5-wrap frame5-outro__grid">
+      <p class="frame5-eyebrow frame5-outro__eyebrow">El siguiente frame es tuyo.</p>
+      <h2 class="frame5-outro__title" id="t6"><span>Hagamos</span> <span>que pase.</span></h2>
+      <div class="frame5-outro__services">
+        <details class="mol-disclosure" name="servicios" open>
+          <summary class="mol-disclosure__summary">Estrategia &amp; identidad</summary>
+          <div class="mol-disclosure__content">Un punto de vista. Una voz reconocible. Un lenguaje visual con intención.</div>
+        </details>
+        <details class="mol-disclosure" name="servicios">
+          <summary class="mol-disclosure__summary">Diseño &amp; dirección de arte</summary>
+          <div class="mol-disclosure__content">Tipografía, imagen y composición para construir un universo propio.</div>
+        </details>
+        <details class="mol-disclosure" name="servicios">
+          <summary class="mol-disclosure__summary">Digital &amp; movimiento</summary>
+          <div class="mol-disclosure__content">Una identidad que responde, se transforma y acompaña.</div>
+        </details>
+      </div>
+      <div class="frame5-outro__contact">
+        <p>FRAME es una agencia conceptual. Esta quinta exploración saca la idea del cuadro y la deja moverse.</p>
+        <a class="atom-btn atom-btn--tertiary atom-btn--filled atom-btn--size-lg" href="mailto:hola@frame.example">Escríbenos <span aria-hidden="true">↗</span></a>
+        <p class="frame5-outro__mail">hola@frame.example</p>
+      </div>
+      <footer class="frame5-footer">
+        <a class="frame5-chrome__brand" href="#c1">FRAME<sup>V</sup></a>
+        <p>Moving Matter / 2026 · Concepto. Vídeos aportados por el cliente.</p>
+        <p>Sobre <a class="frame5-footer__link" href="https://github.com/Pizarradas/syx">SYX</a> · retícula <a class="frame5-footer__link" href="https://github.com/Pizarradas/skill--grid-system">GRID</a></p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<dialog class="mol-dialog frame5-reel" id="reel" aria-labelledby="reel-title">
+  <form method="dialog" class="mol-dialog__inner">
+    <h2 class="mol-dialog__title" id="reel-title">Color in Motion — Reel</h2>
+    <div class="mol-dialog__body">
+      <video class="frame5-reel__video" id="reel-video" controls playsinline preload="none"></video>
+      <p class="frame5-reel__note">Vídeo aportado por el cliente · sin audio.</p>
+    </div>
+    <div class="mol-dialog__footer">
+      <button class="atom-btn atom-btn--secondary atom-btn--filled" value="close" autofocus>Cerrar</button>
+    </div>
+  </form>
+</dialog>
+
+<script defer src="assets/gsap/gsap.min.js"></script>
+<script defer src="assets/gsap/ScrollTrigger.min.js"></script>
+<script defer src="assets/syx-colors.js"></script>
+<script defer src="assets/frame5.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "frame5",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "snapshot": "sass --no-source-map --silence-deprecation=mixed-decls scripts/snapshot.scss vendor/syx/css/styles-theme-frame5.css && node vendor/syx/scripts/build-token-snapshot.js",
+    "scan": "node vendor/syx/scripts/scan-drift.js src/frame5.scss src/syx.scss src/theme/_grid-tokens.scss dist/index.html dist/assets/frame5.js --tema frame5",
+    "contrast": "node vendor/syx/scripts/check-contraste.js",
+    "check": "npm run snapshot && npm run scan && npm run contrast",
+    "qa": "node qa/compare.mjs http://localhost:8000/ \"FRAME V\" docs/qa/frame-v"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "postcss": "^8.5.29",
+    "postcss-scss": "^4.0.9",
+    "sass": "1.77"
+  },
+  "private": true,
+  "syx": {
+    "theme": "frame5"
+  },
+  "devDependencies": {
+    "playwright": "1.56.0",
+    "axe-core": "^4.10.0",
+    "pngjs": "^7.0.0"
+  }
+}

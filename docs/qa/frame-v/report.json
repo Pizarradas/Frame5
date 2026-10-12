@@ -1,0 +1,108 @@
+{
+ "label": "FRAME V",
+ "url": "http://localhost:8005/",
+ "desktop": {
+  "positions": 41,
+  "textSamples": 1042,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 0,
+  "contrastFailsUnique": 0,
+  "contrastWorst": [],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 1
+ },
+ "laptop": {
+  "positions": 41,
+  "textSamples": 995,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 0,
+  "contrastFailsUnique": 0,
+  "contrastWorst": [],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 1
+ },
+ "mobile": {
+  "positions": 41,
+  "textSamples": 697,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 0,
+  "contrastFailsUnique": 0,
+  "contrastWorst": [],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 1
+ },
+ "reduced": {
+  "positions": 41,
+  "textSamples": 1156,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 0,
+  "contrastFailsUnique": 0,
+  "contrastWorst": [],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 0
+ },
+ "dark": {
+  "positions": 41,
+  "textSamples": 1042,
+  "overflowX": 0,
+  "errors": [],
+  "contrastFails": 0,
+  "contrastFailsUnique": 0,
+  "contrastWorst": [],
+  "overlapEvents": 0,
+  "overlapPairs": [],
+  "clippedEvents": 0,
+  "clipped": [],
+  "blurredEvents": 1
+ },
+ "axeDesktop": [],
+ "axeMobile": [],
+ "keyboard": {
+  "stops": 20,
+  "notInView": [],
+  "noRing": [],
+  "under24": [],
+  "under44": [
+   "Congelar señal",
+   "SYX",
+   "GRID"
+  ]
+ },
+ "perf": {
+  "initialBytesKB": 2994,
+  "requests": 16,
+  "byTypeKB": {
+   "document": 13,
+   "stylesheet": 156,
+   "image": 188,
+   "font": 90,
+   "script": 139,
+   "media": 2408
+  },
+  "lcpMs": 332,
+  "cls": 0.0076,
+  "domNodes": 243,
+  "scrollScriptMs": 248,
+  "scrollLayoutMs": 27,
+  "scrollStyleMs": 215,
+  "frameP95ms": 33.4,
+  "framesOver50ms": 5,
+  "sweepMs": 4960
+ }
+}
